@@ -1,0 +1,146 @@
+{
+  "name": "aegisgate-rampart",
+  "displayName": "AegisGate Rampart",
+  "description": "Local AI security proxy — detect PII, secrets, XSS, and adversarial prompts before they leave your machine.",
+  "version": "0.1.0",
+  "publisher": "aegisgatesecurity",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aegisgatesecurity/aegisgate-rampart-ext"
+  },
+  "homepage": "https://aegisgatesecurity.io/rampart",
+  "icon": "icons/icon-128.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Security",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "security",
+    "privacy",
+    "PII",
+    "secrets",
+    "AI",
+    "proxy",
+    "detection"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aegisgate-rampart.checkStatus",
+        "title": "Rampart: Check Status"
+      },
+      {
+        "command": "aegisgate-rampart.scanSelection",
+        "title": "Rampart: Scan Selected Text"
+      },
+      {
+        "command": "aegisgate-rampart.scanDocument",
+        "title": "Rampart: Scan Active Document"
+      },
+      {
+        "command": "aegisgate-rampart.showStats",
+        "title": "Rampart: Show Proxy Statistics"
+      },
+      {
+        "command": "aegisgate-rampart.clearDiagnostics",
+        "title": "Rampart: Clear Diagnostics"
+      }
+    ],
+    "configuration": {
+      "title": "AegisGate Rampart",
+      "properties": {
+        "aegisgate-rampart.proxyUrl": {
+          "type": "string",
+          "default": "http://localhost:8080",
+          "description": "URL of the running Rampart proxy instance"
+        },
+        "aegisgate-rampart.autoScan": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically scan text when editor content changes"
+        },
+        "aegisgate-rampart.scanDebounceMs": {
+          "type": "number",
+          "default": 500,
+          "description": "Debounce interval (ms) before scanning after text changes"
+        },
+        "aegisgate-rampart.scanOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Scan document when saved"
+        },
+        "aegisgate-rampart.severityThreshold": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "default": "low",
+          "description": "Minimum severity level to display as diagnostics"
+        },
+        "aegisgate-rampart.maxDiagnostics": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of diagnostics to display per document"
+        },
+        "aegisgate-rampart.languageIds": {
+          "type": "array",
+          "default": [
+            "plaintext",
+            "markdown",
+            "html",
+            "javascript",
+            "typescript",
+            "python",
+            "go",
+            "rust",
+            "java",
+            "c",
+            "cpp",
+            "ruby",
+            "php",
+            "shellscript",
+            "yaml",
+            "json",
+            "xml"
+          ],
+          "description": "Language IDs to scan automatically"
+        },
+        "aegisgate-rampart.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show connection status in the status bar"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vscode/vsce": "^3.0.0",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^9.0.0",
+    "glob": "^10.3.0",
+    "mocha": "^10.8.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {}
+}
