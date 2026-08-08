@@ -50,9 +50,20 @@ export class StatusBarManager implements vscode.Disposable {
     if (alive) {
       try {
         const stats = await this.client.getStatus();
-        this.statusItem.text = `$(shield) ${stats.detections}`;
-        this.statusItem.tooltip = `AegisGate Rampart\nDetections: ${stats.detections}\nBlocked: ${stats.blocked_requests}\nRequests: ${stats.total_requests}`;
-        this.statusItem.backgroundColor = undefined;
+        const mode = stats.mode || "monitor";
+        if (mode === "block") {
+          this.statusItem.text = `🚫 Rampart: BLOCK`;
+        } else {
+          this.statusItem.text = `🔍 Rampart: MONITOR`;
+        }
+        this.statusItem.tooltip = `AegisGate Rampart\nMode: ${mode.toUpperCase()}\nDetections: ${stats.detections}\nBlocked: ${stats.blocked_requests}\nRequests: ${stats.total_requests}`;
+        if (mode === "block") {
+          this.statusItem.backgroundColor = new vscode.ThemeColor(
+            "statusBarItem.errorBackground",
+          );
+        } else {
+          this.statusItem.backgroundColor = undefined;
+        }
       } catch {
         this.setDisconnected();
       }

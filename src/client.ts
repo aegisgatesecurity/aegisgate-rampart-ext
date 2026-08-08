@@ -38,6 +38,7 @@ export interface ProxyStats {
   blocked_requests: number;
   ml_detections: number;
   start_time: string;
+  mode: "monitor" | "block";
 }
 
 export class RampartClient {
