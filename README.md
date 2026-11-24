@@ -23,7 +23,7 @@ This extension connects to [AegisGate Rampart](https://github.com/aegisgatesecur
 | **Scan on save** | Automatic scan when you save a file |
 | **Scan Selection** | Select text → Command Palette → "Rampart: Scan Selected Text" |
 | **Scan Document** | Command Palette → "Rampart: Scan Active Document" |
-| **Inline diagnostics** | 🔐 PII · 💳 Financial · 🌍 International · 🔑 Secrets · ⚔️ XSS · 📋 Compliance · 🧠 ML |
+| **Inline diagnostics** | 🔐 PII · 💳 Financial · 🌍 International · 🔑 Secrets · ⚔️ XSS · 📋 Compliance |
 | **Status bar** | Detection count + connection status (bottom right) |
 | **Severity filtering** | Only show diagnostics at or above your chosen threshold |
 | **Show Stats** | View proxy statistics (requests, detections, blocked) |
@@ -43,7 +43,7 @@ This extension connects to [AegisGate Rampart](https://github.com/aegisgatesecur
 
 ## Detection Categories
 
-The extension displays 154 regex patterns + ML neural network detections from Rampart:
+The extension displays 154 regex patterns from Rampart (neural ML detection was withdrawn 2026-11-23):
 
 | Icon | Category | Detects |
 |------|----------|---------|
@@ -54,7 +54,7 @@ The extension displays 154 regex patterns + ML neural network detections from Ra
 | 🔑 | Secrets | AWS keys, GitHub tokens, OAuth, JWT, database URLs |
 | ⚔️ | XSS | Script injection, event handlers, data URIs |
 | 📋 | Compliance | GDPR, HIPAA, PCI-DSS, SOX identifiers |
-| 🧠 | ML Threat | Char CNN-BiLSTM adversarial prompt detection |
+| 🧠 | ~~ML Threat~~ | WITHDRAWN 2026-11-23 — neural ML detection withdrawn (see [aegisgate-rampart docs/ML-WITHDRAWN.md](https://github.com/aegisgatesecurity/aegisgate-rampart/blob/main/docs/ML-WITHDRAWN.md)) |
 
 ## Privacy (12 Non-Negotiables)
 
@@ -79,10 +79,10 @@ This extension enforces the same 12 privacy rules as Rampart, Lens, and Platform
 
 | Product | Surface | Approach | Detection |
 |---------|---------|----------|-----------|
-| **Lens** | Browser | DOM blocking (before send) | 154 regex + JS ML |
-| **Rampart** | Desktop, CLI, IDE | HTTPS proxy (after send) | 154 regex + Go ML |
+| **Lens** | Browser | DOM blocking (before send) | 154 regex |
+| **Rampart** | Desktop, CLI, IDE | HTTPS proxy (after send) | 154 regex |
 | **Rampart Ext** | VS Code, Cursor | IDE diagnostics (localhost API) | Same engine via Rampart proxy |
-| **Platform** | Server | API gateway | 154 regex + Go ML |
+| **Platform** | Server | API gateway | 154 regex |
 
 **Lens blocks before send. Rampart alerts after send. Extension warns in the IDE.**
 
